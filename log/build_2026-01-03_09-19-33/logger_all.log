@@ -1,0 +1,117 @@
+[3.104s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[3.105s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=4, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7024756e3490>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x70247582c8b0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x70247582c8b0>>)
+[5.769s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[5.770s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[5.770s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[5.771s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[5.772s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[5.777s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[5.778s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws'
+[5.781s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[5.782s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[5.782s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[5.782s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[5.782s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[5.782s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[5.783s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[5.783s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[5.783s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[6.054s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[6.054s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[6.054s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[6.054s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[6.055s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[6.055s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[6.056s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[6.056s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[6.060s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[6.061s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[6.061s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[6.061s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[6.062s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[6.067s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[6.068s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[6.069s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[6.069s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[6.069s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[6.069s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[6.069s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[6.069s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[6.070s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[6.070s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[6.070s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[6.071s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[6.071s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[6.071s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[6.071s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[6.072s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extensions ['ignore', 'ignore_ament_install']
+[6.072s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extension 'ignore'
+[6.072s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extension 'ignore_ament_install'
+[6.073s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extensions ['colcon_pkg']
+[6.073s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extension 'colcon_pkg'
+[6.074s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extensions ['colcon_meta']
+[6.076s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extension 'colcon_meta'
+[6.077s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extensions ['ros']
+[6.077s] Level 1:colcon.colcon_core.package_identification:_identify(src/windowclean_pro) by extension 'ros'
+[6.139s] DEBUG:colcon.colcon_core.package_identification:Package 'src/windowclean_pro' with type 'ros.ament_cmake' and name 'windowclean_pro'
+[6.139s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[6.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[6.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[6.149s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[6.149s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[6.485s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[6.485s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[6.534s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 276 installed packages in /opt/ros/humble
+[6.594s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'cmake_args' from command line to 'None'
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'cmake_target' from command line to 'None'
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'cmake_clean_cache' from command line to 'False'
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'cmake_clean_first' from command line to 'False'
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'cmake_force_configure' from command line to 'False'
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'ament_cmake_args' from command line to 'None'
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'catkin_cmake_args' from command line to 'None'
+[7.188s] Level 5:colcon.colcon_core.verb:set package 'windowclean_pro' build argument 'catkin_skip_building_tests' from command line to 'False'
+[7.189s] DEBUG:colcon.colcon_core.verb:Building package 'windowclean_pro' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/build/windowclean_pro', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro', 'merge_install': False, 'path': '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/src/windowclean_pro', 'symlink_install': True, 'test_result_base': None}
+[7.190s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[7.204s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[7.218s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/src/windowclean_pro' with build type 'ament_cmake'
+[7.236s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/src/windowclean_pro'
+[7.256s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[7.266s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[7.267s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[7.454s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/build/windowclean_pro': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/src/windowclean_pro -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro
+[286.412s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/build/windowclean_pro' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/src/windowclean_pro -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro
+[286.624s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(windowclean_pro)
+[286.699s] Level 1:colcon.colcon_core.environment:checking '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro' for CMake module files
+[286.701s] Level 1:colcon.colcon_core.environment:checking '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro' for CMake config files
+[286.702s] Level 1:colcon.colcon_core.environment:checking '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/bin'
+[286.703s] Level 1:colcon.colcon_core.environment:checking '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/lib/pkgconfig/windowclean_pro.pc'
+[286.714s] Level 1:colcon.colcon_core.environment:checking '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/lib/python3.10/site-packages'
+[286.716s] Level 1:colcon.colcon_core.environment:checking '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/bin'
+[286.718s] INFO:colcon.colcon_core.shell:Creating package script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/share/windowclean_pro/package.ps1'
+[286.735s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/share/windowclean_pro/package.dsv'
+[286.757s] INFO:colcon.colcon_core.shell:Creating package script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/share/windowclean_pro/package.sh'
+[286.769s] INFO:colcon.colcon_core.shell:Creating package script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/share/windowclean_pro/package.bash'
+[286.785s] INFO:colcon.colcon_core.shell:Creating package script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/share/windowclean_pro/package.zsh'
+[286.796s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro/share/colcon-core/packages/windowclean_pro)
+[286.813s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[286.814s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[286.814s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[286.815s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[287.934s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[287.934s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[287.934s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[287.935s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[287.950s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.FileNotFound: Failed to connect to socket /run/user/1000/bus: No such file or directory
+[287.953s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[287.962s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/local_setup.ps1'
+[287.969s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/_local_setup_util_ps1.py'
+[287.982s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/setup.ps1'
+[287.986s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/local_setup.sh'
+[288.007s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/_local_setup_util_sh.py'
+[288.018s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/setup.sh'
+[288.033s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/local_setup.bash'
+[288.034s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/setup.bash'
+[288.045s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/local_setup.zsh'
+[288.049s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/setup.zsh'

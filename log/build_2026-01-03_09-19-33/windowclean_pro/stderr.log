@@ -1,0 +1,9 @@
+[31mCMake Error at CMakeLists.txt:28 (message):
+  gazebo_ros package not found!
+
+  Please install it with: sudo apt install ros-humble-gazebo-ros
+  ros-humble-gazebo-ros-pkgs
+
+  Or run: ./install_dependencies.sh
+
+[0m

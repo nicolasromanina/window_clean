@@ -1,0 +1,545 @@
+<?xml version="1.0"?>
+<!--
+  Modèle URDF Xacro principal du robot nettoyeur de vitres WindowClean Pro
+  
+  Caractéristiques:
+  - Dimensions: 30×30×8 cm
+  - Masse: 2.5 kg
+  - MCU: ESP32-S3 (simulé)
+  - Capteurs: Ultrasons HC-SR04, IMU MPU6050, Encodeurs
+  - Actionneurs: Moteurs DC brushless, Micropompes, Moteur pas-à-pas
+  - Système: Ventouses à vide régulé
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="windowclean_pro">
+
+  <!-- ==========================================
+       PARAMÈTRES GLOBAUX
+       ========================================== -->
+  <xacro:property name="M_PI" value="3.1415926535897931"/>
+  
+  <!-- Dimensions principales (en mètres) -->
+  <xacro:property name="base_length" value="0.30"/>
+  <xacro:property name="base_width" value="0.30"/>
+  <xacro:property name="base_height" value="0.08"/>
+  <xacro:property name="base_mass" value="2.5"/>
+  
+  <!-- Rayon des roues -->
+  <xacro:property name="wheel_radius" value="0.05"/>
+  <xacro:property name="wheel_width" value="0.03"/>
+  <xacro:property name="wheel_mass" value="0.15"/>
+  <xacro:property name="wheel_separation" value="0.26"/>
+  
+  <!-- Position des roues par rapport au centre -->
+  <xacro:property name="wheel_y_offset" value="${wheel_separation/2}"/>
+  
+  <!-- ==========================================
+       MACRO: MATÉRIAU
+       ========================================== -->
+  <xacro:macro name="windowclean_material" params="name r g b a">
+    <material name="${name}">
+      <color rgba="${r} ${g} ${b} ${a}"/>
+    </material>
+  </xacro:macro>
+
+  <xacro:windowclean_material name="base_blue" r="0.1" g="0.4" b="0.8" a="1.0"/>
+  <xacro:windowclean_material name="wheel_gray" r="0.2" g="0.2" b="0.2" a="1.0"/>
+  <xacro:windowclean_material name="suction_ring" r="0.8" g="0.1" b="0.1" a="0.8"/>
+  <xacro:windowclean_material name="sensor_ring" r="0.0" g="0.8" b="0.0" a="0.6"/>
+  
+  <!-- ==========================================
+       MACRO: CAPTEUR ULTRASON HC-SR04
+       ========================================== -->
+  <xacro:macro name="ultrasonic_sensor" params="name parent x y z roll pitch yaw">
+    <link name="${name}_link">
+      <pose>${x} ${y} ${z} ${roll} ${pitch} ${yaw}</pose>
+      <inertial>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>0.00001</ixx>
+          <iyy>0.00001</iyy>
+          <izz>0.00001</izz>
+        </inertia>
+      </inertial>
+      <visual name="${name}_visual">
+        <geometry>
+          <box>
+            <size>0.045 0.02 0.015</size>
+          </box>
+        </geometry>
+        <material name="sensor_ring"/>
+      </visual>
+      <collision name="${name}_collision">
+        <geometry>
+          <box>
+            <size>0.045 0.02 0.015</size>
+          </box>
+        </geometry>
+      </collision>
+      <sensor name="${name}" type="ray">
+        <pose>0 0 0 0 0 0</pose>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>10</samples>
+              <resolution>1.0</resolution>
+              <min_angle>-0.1745</min_angle>  <!-- ~10 degrés -->
+              <max_angle>0.1745</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>1.0</resolution>
+              <min_angle>-0.0524</min_angle>  <!-- ~3 degrés -->
+              <max_angle>0.0524</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.02</min>
+            <max>4.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <visualize>true</visualize>
+        <plugin name="${name}_plugin" filename="libultrasonic_sensor_plugin.so">
+          <ros>
+            <namespace>/windowclean_pro</namespace>
+          </ros>
+          <topic_name>${name}/range</topic_name>
+          <frame_name>${name}_link</frame_name>
+          <min_range>0.02</min_range>
+          <max_range>4.0</max_range>
+          <noise_mean>0.0</noise_mean>
+          <noise_stddev>0.01</noise_stddev>
+        </plugin>
+      </sensor>
+    </link>
+    <joint name="${name}_joint" type="fixed">
+      <parent>${parent}</parent>
+      <child>${name}_link</child>
+    </joint>
+  </xacro:macro>
+
+  <!-- ==========================================
+       MACRO: SYSTÈME VENTOUSE
+       ========================================== -->
+  <xacro:macro name="suction_cup" params="name parent x y z">
+    <link name="${name}_link">
+      <pose>${x} ${y} ${z} 0 0 0</pose>
+      <inertial>
+        <mass>0.05</mass>
+        <inertia>
+          <ixx>0.0001</ixx>
+          <iyy>0.0001</iyy>
+          <izz>0.0001</izz>
+        </inertia>
+      </inertial>
+      <visual name="${name}_visual">
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>0.01</length>
+          </cylinder>
+        </geometry>
+        <material name="suction_ring"/>
+      </visual>
+      <collision name="${name}_collision">
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>0.01</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.5</mu>
+              <mu2>1.5</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000</kp>
+              <kd>100</kd>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <plugin name="${name}_plugin" filename="libvacuum_suction_plugin.so">
+        <ros>
+          <namespace>/windowclean_pro</namespace>
+        </ros>
+        <topic_name>${name}/vacuum</topic_name>
+        <link_name>${name}_link</link_name>
+        <max_suction_force>100.0</max_suction_force>
+        <suction_area>0.002827</suction_area>  <!-- π * 0.03^2 -->
+        <update_rate>50</update_rate>
+      </plugin>
+    </link>
+    <joint name="${name}_joint" type="fixed">
+      <parent>${parent}</parent>
+      <child>${name}_link</child>
+    </joint>
+  </xacro:macro>
+
+  <!-- ==========================================
+       MACRO: ROUE AVEC ENCODEUR
+       ========================================== -->
+  <xacro:macro name="wheel_with_encoder" params="name parent x y z axis_direction">
+    <link name="${name}">
+      <pose>${x} ${y} ${z} 0 0 0</pose>
+      <inertial>
+        <mass>${wheel_mass}</mass>
+        <inertia>
+          <ixx>${wheel_mass * (3*wheel_radius*wheel_radius + wheel_width*wheel_width) / 12}</ixx>
+          <iyy>${wheel_mass * (3*wheel_radius*wheel_radius + wheel_width*wheel_width) / 12}</iyy>
+          <izz>${wheel_mass * wheel_radius * wheel_radius / 2}</izz>
+        </inertia>
+      </inertial>
+      <visual name="${name}_visual">
+        <geometry>
+          <cylinder>
+            <radius>${wheel_radius}</radius>
+            <length>${wheel_width}</length>
+          </cylinder>
+        </geometry>
+        <material name="wheel_gray"/>
+      </visual>
+      <collision name="${name}_collision">
+        <geometry>
+          <cylinder>
+            <radius>${wheel_radius}</radius>
+            <length>${wheel_width}</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+    
+    <joint name="${name}_joint" type="continuous">
+      <parent>${parent}</parent>
+      <child>${name}</child>
+      <axis>
+        <xyz>${axis_direction} 0 0</xyz>
+        <limit>
+          <lower>-1000</lower>
+          <upper>1000</upper>
+          <effort>50</effort>
+          <velocity>10</velocity>
+        </limit>
+      </axis>
+    </joint>
+    
+    <!-- Encodeur incrémental 600 PPR -->
+    <plugin name="${name}_encoder" filename="libencoder_plugin.so">
+      <ros>
+        <namespace>/windowclean_pro</namespace>
+      </ros>
+      <joint_name>${name}_joint</joint_name>
+      <topic_name>${name}/encoder</topic_name>
+      <pulses_per_revolution>600</pulses_per_revolution>
+      <update_rate>100</update_rate>
+    </plugin>
+  </xacro:macro>
+
+  <!-- ==========================================
+       BASE DU ROBOT
+       ========================================== -->
+  <link name="base_link">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass>${base_mass}</mass>
+      <inertia>
+        <ixx>${base_mass * (base_width*base_width + base_height*base_height) / 12}</ixx>
+        <iyy>${base_mass * (base_length*base_length + base_height*base_height) / 12}</iyy>
+        <izz>${base_mass * (base_length*base_length + base_width*base_width) / 12}</izz>
+      </inertia>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </inertial>
+    
+    <visual name="base_visual">
+      <geometry>
+        <box>
+          <size>${base_length} ${base_width} ${base_height}</size>
+        </box>
+      </geometry>
+      <material name="base_blue"/>
+    </visual>
+    
+    <collision name="base_collision">
+      <geometry>
+        <box>
+          <size>${base_length} ${base_width} ${base_height}</size>
+        </box>
+      </geometry>
+    </collision>
+    
+    <!-- IMU MPU6050 au centre du robot -->
+    <sensor name="imu" type="imu">
+      <plugin name="imu_plugin" filename="libimu_mpu6050_plugin.so">
+        <ros>
+          <namespace>/windowclean_pro</namespace>
+        </ros>
+        <topic_name>imu/data</topic_name>
+        <frame_name>base_link</frame_name>
+        <update_rate>100</update_rate>
+        <gyro_noise_mean>0.0</gyro_noise_mean>
+        <gyro_noise_stddev>0.00017</gyro_noise_stddev>
+        <accel_noise_mean>0.0</accel_noise_mean>
+        <accel_noise_stddev>0.00196</accel_noise_stddev>
+      </plugin>
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+    </sensor>
+    
+    <!-- Capteur de pression différentielle -->
+    <sensor name="pressure_sensor" type="force_torque">
+      <plugin name="pressure_plugin" filename="libgazebo_ros_force.so">
+        <ros>
+          <namespace>/windowclean_pro</namespace>
+        </ros>
+        <topic_name>pressure/differential</topic_name>
+        <frame_name>base_link</frame_name>
+      </plugin>
+      <always_on>true</always_on>
+      <update_rate>50</update_rate>
+    </sensor>
+    
+    <!-- Batterie Li-ion -->
+    <plugin name="battery" filename="libbattery_plugin.so">
+      <ros>
+        <namespace>/windowclean_pro</namespace>
+      </ros>
+      <topic_name>battery/state</topic_name>
+      <initial_charge>100.0</initial_charge>
+      <capacity>7.4</capacity>  <!-- Ah -->
+      <voltage>14.8</voltage>  <!-- V -->
+      <current_draw>2.5</current_draw>  <!-- A moyen -->
+      <update_rate>10</update_rate>
+    </plugin>
+  </link>
+
+  <!-- ==========================================
+       ROUE GAUCHE
+       ========================================== -->
+  <xacro:wheel_with_encoder 
+    name="left_wheel" 
+    parent="base_link"
+    x="0" 
+    y="${wheel_y_offset}" 
+    z="${-base_height/2 - wheel_radius}"
+    axis_direction="0 1 0"
+  />
+
+  <!-- ==========================================
+       ROUE DROITE
+       ========================================== -->
+  <xacro:wheel_with_encoder 
+    name="right_wheel" 
+    parent="base_link"
+    x="0" 
+    y="${-wheel_y_offset}" 
+    z="${-base_height/2 - wheel_radius}"
+    axis_direction="0 1 0"
+  />
+
+  <!-- ==========================================
+       CAPTEURS ULTRASON (4 pour bords)
+       ========================================== -->
+  <!-- Avant -->
+  <xacro:ultrasonic_sensor 
+    name="ultrasonic_front" 
+    parent="base_link"
+    x="${base_length/2 - 0.02}" 
+    y="0" 
+    z="${base_height/2 + 0.01}" 
+    roll="0" 
+    pitch="0" 
+    yaw="0"
+  />
+  
+  <!-- Arrière -->
+  <xacro:ultrasonic_sensor 
+    name="ultrasonic_back" 
+    parent="base_link"
+    x="${-base_length/2 + 0.02}" 
+    y="0" 
+    z="${base_height/2 + 0.01}" 
+    roll="0" 
+    pitch="0" 
+    yaw="${M_PI}"
+  />
+  
+  <!-- Gauche -->
+  <xacro:ultrasonic_sensor 
+    name="ultrasonic_left" 
+    parent="base_link"
+    x="0" 
+    y="${base_width/2 - 0.02}" 
+    z="${base_height/2 + 0.01}" 
+    roll="0" 
+    pitch="0" 
+    yaw="${M_PI/2}"
+  />
+  
+  <!-- Droite -->
+  <xacro:ultrasonic_sensor 
+    name="ultrasonic_right" 
+    parent="base_link"
+    x="0" 
+    y="${-base_width/2 + 0.02}" 
+    z="${base_height/2 + 0.01}" 
+    roll="0" 
+    pitch="0" 
+    yaw="${-M_PI/2}"
+  />
+
+  <!-- ==========================================
+       CAPTEURS ÉPAISSEUR VITRE (2)
+       ========================================== -->
+  <xacro:ultrasonic_sensor 
+    name="ultrasonic_thickness_1" 
+    parent="base_link"
+    x="${base_length/4}" 
+    y="0" 
+    z="${-base_height/2 - 0.01}" 
+    roll="${M_PI/2}" 
+    pitch="0" 
+    yaw="0"
+  />
+  
+  <xacro:ultrasonic_sensor 
+    name="ultrasonic_thickness_2" 
+    parent="base_link"
+    x="${-base_length/4}" 
+    y="0" 
+    z="${-base_height/2 - 0.01}" 
+    roll="${M_PI/2}" 
+    pitch="0" 
+    yaw="0"
+  />
+
+  <!-- ==========================================
+       CAPTEUR OBSTACLES
+       ========================================== -->
+  <xacro:ultrasonic_sensor 
+    name="ultrasonic_obstacle" 
+    parent="base_link"
+    x="0" 
+    y="0" 
+    z="${base_height/2 + 0.015}" 
+    roll="0" 
+    pitch="0" 
+    yaw="0"
+  />
+
+  <!-- ==========================================
+       SYSTÈME VENTOUSES (4 aux coins)
+       ========================================== -->
+  <xacro:suction_cup 
+    name="suction_fl" 
+    parent="base_link"
+    x="${base_length/2 - 0.05}" 
+    y="${base_width/2 - 0.05}" 
+    z="${-base_height/2}"
+  />
+  
+  <xacro:suction_cup 
+    name="suction_fr" 
+    parent="base_link"
+    x="${base_length/2 - 0.05}" 
+    y="${-base_width/2 + 0.05}" 
+    z="${-base_height/2}"
+  />
+  
+  <xacro:suction_cup 
+    name="suction_bl" 
+    parent="base_link"
+    x="${-base_length/2 + 0.05}" 
+    y="${base_width/2 - 0.05}" 
+    z="${-base_height/2}"
+  />
+  
+  <xacro:suction_cup 
+    name="suction_br" 
+    parent="base_link"
+    x="${-base_length/2 + 0.05}" 
+    y="${-base_width/2 + 0.05}" 
+    z="${-base_height/2}"
+  />
+
+  <!-- ==========================================
+       BRAS NETTOYEUR (Moteur pas-à-pas)
+       ========================================== -->
+  <link name="cleaning_arm_link">
+    <pose>0 0 ${base_height/2 + 0.02} 0 0 0</pose>
+    <inertial>
+      <mass>0.1</mass>
+      <inertia>
+        <ixx>0.001</ixx>
+        <iyy>0.001</iyy>
+        <izz>0.0001</izz>
+      </inertia>
+    </inertial>
+    <visual name="cleaning_arm_visual">
+      <geometry>
+        <box>
+          <size>0.25 0.05 0.02</size>
+        </box>
+      </geometry>
+      <material name="wheel_gray"/>
+    </visual>
+    <collision name="cleaning_arm_collision">
+      <geometry>
+        <box>
+          <size>0.25 0.05 0.02</size>
+        </box>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="cleaning_arm_joint" type="revolute">
+    <parent>base_link</parent>
+    <child>cleaning_arm_link</child>
+    <axis>
+      <xyz>0 1 0</xyz>
+      <limit>
+        <lower>-${M_PI}</lower>
+        <upper>${M_PI}</upper>
+        <effort>5</effort>
+        <velocity>2</velocity>
+      </limit>
+    </axis>
+  </joint>
+
+  <!-- ==========================================
+       PLUGIN CONTRÔLEUR DIFFÉRENTIEL
+       ========================================== -->
+  <plugin name="differential_drive_controller" filename="libdifferential_drive_controller_plugin.so">
+    <ros>
+      <namespace>/windowclean_pro</namespace>
+    </ros>
+    <left_joint>left_wheel_joint</left_joint>
+    <right_joint>right_wheel_joint</right_joint>
+    <wheel_separation>${wheel_separation}</wheel_separation>
+    <wheel_diameter>${2*wheel_radius}</wheel_diameter>
+    <max_wheel_torque>50</max_wheel_torque>
+    <command_topic>cmd_vel</command_topic>
+    <odometry_topic>odom</odometry_topic>
+    <odometry_frame>odom</odometry_frame>
+    <robot_base_frame>base_link</robot_base_frame>
+    <publish_odom>true</publish_odom>
+    <publish_odom_tf>true</publish_odom_tf>
+    <update_rate>50</update_rate>
+  </plugin>
+
+</robot>
+

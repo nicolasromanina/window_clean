@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<!--
+  Environnement de test : Bureau open-space avec grandes baies vitrées
+  - 3 grandes baies vitrées (4×3m chacune)
+  - Fenêtres de bureau (1.5×1.5m)
+  - Obstacles (meubles, cloisons)
+-->
+<sdf version="1.7">
+<world name="office">
+
+  <include>
+    <uri>model://sun</uri>
+  </include>
+  
+  <scene>
+    <ambient>0.75 0.75 0.75 1</ambient>
+    <background>0.88 0.88 0.92 1</background>
+    <shadows>true</shadows>
+  </scene>
+
+  <physics type="ode">
+    <real_time_factor>1.0</real_time_factor>
+    <real_time_update_rate>1000</real_time_update_rate>
+    <max_step_size>0.001</max_step_size>
+    <gravity>0 0 -9.81</gravity>
+  </physics>
+
+  <!-- Baie vitrée 1 -->
+  <model name="bay_window_1">
+    <pose>-5 0 2.0 0 0 0</pose>
+    <static>true</static>
+    <link name="glass">
+      <collision name="collision">
+        <geometry>
+          <box><size>4.0 3.0 0.01</size></box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.1</mu><mu2>0.1</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box><size>4.0 3.0 0.01</size></box>
+        </geometry>
+        <material>
+          <transparency>0.25</transparency>
+          <ambient>0.85 0.9 0.95 0.4</ambient>
+        </material>
+      </visual>
+      <inertial>
+        <mass>120.0</mass>
+        <inertia>
+          <ixx>90.0</ixx>
+          <iyy>160.0</iyy>
+          <izz>250.0</izz>
+        </inertia>
+      </inertial>
+    </link>
+  </model>
+
+  <!-- Baie vitrée 2 -->
+  <model name="bay_window_2">
+    <pose>0 0 2.0 0 0 0</pose>
+    <static>true</static>
+    <link name="glass">
+      <collision name="collision">
+        <geometry>
+          <box><size>4.0 3.0 0.01</size></box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.1</mu><mu2>0.1</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box><size>4.0 3.0 0.01</size></box>
+        </geometry>
+        <material>
+          <transparency>0.25</transparency>
+          <ambient>0.85 0.9 0.95 0.4</ambient>
+        </material>
+      </visual>
+      <inertial>
+        <mass>120.0</mass>
+        <inertia>
+          <ixx>90.0</ixx>
+          <iyy>160.0</iyy>
+          <izz>250.0</izz>
+        </inertia>
+      </inertial>
+    </link>
+  </model>
+
+  <!-- Baie vitrée 3 -->
+  <model name="bay_window_3">
+    <pose>5 0 2.0 0 0 0</pose>
+    <static>true</static>
+    <link name="glass">
+      <collision name="collision">
+        <geometry>
+          <box><size>4.0 3.0 0.01</size></box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.1</mu><mu2>0.1</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box><size>4.0 3.0 0.01</size></box>
+        </geometry>
+        <material>
+          <transparency>0.25</transparency>
+          <ambient>0.85 0.9 0.95 0.4</ambient>
+        </material>
+      </visual>
+      <inertial>
+        <mass>120.0</mass>
+        <inertia>
+          <ixx>90.0</ixx>
+          <iyy>160.0</iyy>
+          <izz>250.0</izz>
+        </inertia>
+      </inertial>
+    </link>
+  </model>
+
+  <!-- Fenêtres de bureau -->
+  <model name="office_window_1">
+    <pose>-2.5 4 1.5 0 0 0</pose>
+    <static>true</static>
+    <link name="glass">
+      <collision name="collision">
+        <geometry>
+          <box><size>1.5 1.5 0.01</size></box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.1</mu><mu2>0.1</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box><size>1.5 1.5 0.01</size></box>
+        </geometry>
+        <material>
+          <transparency>0.3</transparency>
+          <ambient>0.9 0.9 1.0 0.5</ambient>
+        </material>
+      </visual>
+      <inertial>
+        <mass>22.5</mass>
+        <inertia>
+          <ixx>4.22</ixx>
+          <iyy>4.22</iyy>
+          <izz>8.44</izz>
+        </inertia>
+      </inertial>
+    </link>
+  </model>
+
+  <model name="office_window_2">
+    <pose>2.5 4 1.5 0 0 0</pose>
+    <static>true</static>
+    <link name="glass">
+      <collision name="collision">
+        <geometry>
+          <box><size>1.5 1.5 0.01</size></box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.1</mu><mu2>0.1</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box><size>1.5 1.5 0.01</size></box>
+        </geometry>
+        <material>
+          <transparency>0.3</transparency>
+          <ambient>0.9 0.9 1.0 0.5</ambient>
+        </material>
+      </visual>
+      <inertial>
+        <mass>22.5</mass>
+        <inertia>
+          <ixx>4.22</ixx>
+          <iyy>4.22</iyy>
+          <izz>8.44</izz>
+        </inertia>
+      </inertial>
+    </link>
+  </model>
+
+  <!-- Cloisons (obstacles) -->
+  <model name="partition_1">
+    <pose>0 3.5 1.0 0 0 0</pose>
+    <static>true</static>
+    <link name="partition">
+      <collision name="collision">
+        <geometry>
+          <box><size>8.0 0.1 2.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box><size>8.0 0.1 2.0</size></box>
+        </geometry>
+        <material>
+          <ambient>0.7 0.7 0.7 1</ambient>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <!-- Mur de support -->
+  <model name="office_wall">
+    <pose>0 0 2.0 -0.05 0 0</pose>
+    <static>true</static>
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box><size>20 10 4</size></box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box><size>20 10 4</size></box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.85 0.85 1</ambient>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  <light type="directional" name="office_light">
+    <pose>0 0 6 0.2 -0.2 -1</pose>
+    <diffuse>0.9 0.9 0.88 1</diffuse>
+    <cast_shadows>true</cast_shadows>
+  </light>
+
+</world>
+</sdf>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>windowclean_pro</name>
+  <version>1.0.0</version>
+  <description>Simulation complète du robot nettoyeur de vitres autonome WindowClean Pro pour Gazebo avec ROS2</description>
+  <maintainer email="arnia@example.com">Arnia</maintainer>
+  <license>MIT</license>
+
+  <!-- Dépendances ROS2 -->
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>action_msgs</depend>
+  
+  <!-- Gazebo -->
+  <depend>gazebo_ros</depend>
+  <depend>gazebo_ros_pkgs</depend>
+  
+  <!-- URDF/Xacro -->
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+  <depend>robot_state_publisher</depend>
+  
+  <!-- Launch -->
+  <exec_depend>ros2launch</exec_depend>
+  
+  <!-- Tests -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

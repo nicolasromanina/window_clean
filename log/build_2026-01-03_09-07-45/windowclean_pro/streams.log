@@ -1,0 +1,57 @@
+[0.456s] Invoking command in '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/build/windowclean_pro': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/src/windowclean_pro -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro
+[3.948s] -- The C compiler identification is GNU 11.4.0
+[7.757s] -- The CXX compiler identification is GNU 11.4.0
+[9.804s] -- Detecting C compiler ABI info
+[10.549s] -- Detecting C compiler ABI info - done
+[10.570s] -- Check for working C compiler: /usr/bin/cc - skipped
+[10.573s] -- Detecting C compile features
+[10.575s] -- Detecting C compile features - done
+[10.589s] -- Detecting CXX compiler ABI info
+[11.570s] -- Detecting CXX compiler ABI info - done
+[11.603s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[11.608s] -- Detecting CXX compile features
+[11.610s] -- Detecting CXX compile features - done
+[11.654s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[12.551s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[13.446s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[13.858s] -- Found rclcpp: 16.0.16 (/opt/ros/humble/share/rclcpp/cmake)
+[14.958s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[15.017s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[15.099s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[15.223s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[15.378s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[15.938s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[15.988s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[29.125s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[37.007s] -- Found FastRTPS: /opt/ros/humble/include  
+[48.523s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[48.600s] -- Looking for pthread.h
+[49.805s] -- Looking for pthread.h - found
+[49.805s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[50.406s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[50.406s] -- Found Threads: TRUE  
+[50.776s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[50.983s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[51.093s] -- Found tf2_ros: 0.25.17 (/opt/ros/humble/share/tf2_ros/cmake)
+[51.789s] -- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)
+[51.892s] -- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)
+[57.386s] [31mCMake Error at CMakeLists.txt:25 (find_package):
+[57.386s]   By not providing "Findgazebo_ros.cmake" in CMAKE_MODULE_PATH this project
+[57.386s]   has asked CMake to find a package configuration file provided by
+[57.386s]   "gazebo_ros", but CMake did not find one.
+[57.387s] 
+[57.387s]   Could not find a package configuration file provided by "gazebo_ros" with
+[57.387s]   any of the following names:
+[57.387s] 
+[57.387s]     gazebo_rosConfig.cmake
+[57.387s]     gazebo_ros-config.cmake
+[57.388s] 
+[57.388s]   Add the installation prefix of "gazebo_ros" to CMAKE_PREFIX_PATH or set
+[57.388s]   "gazebo_ros_DIR" to a directory containing one of the above files.  If
+[57.388s]   "gazebo_ros" provides a separate development package or SDK, be sure it has
+[57.388s]   been installed.
+[57.388s] 
+[57.388s] [0m
+[57.389s] -- Configuring incomplete, errors occurred!
+[57.389s] See also "/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/build/windowclean_pro/CMakeFiles/CMakeOutput.log".
+[57.444s] Invoked command in '/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/build/windowclean_pro' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/src/windowclean_pro -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/arnia/.gazebo/models/robot_autonome/windowclean_pro_ws/install/windowclean_pro
